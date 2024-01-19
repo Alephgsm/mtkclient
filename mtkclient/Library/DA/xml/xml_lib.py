@@ -169,8 +169,7 @@ class DAXML(metaclass=LogBase):
             loglevel = LogLevel().WARN
         elif da_log_level == 4:
             loglevel = LogLevel().ERROR
-        system_os = FtSystemOSE.OS_LINUX
-        res = self.send_command(self.Cmd.cmd_set_runtime_parameter(da_log_level=loglevel, system_os=system_os))
+        res = self.send_command(self.Cmd.cmd_set_runtime_parameter(da_log_level=loglevel))
         return res
 
     def send_command(self, xmldata, noack: bool = False):
