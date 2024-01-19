@@ -184,10 +184,10 @@ class DAXML(metaclass=LogBase):
                     self.ack()
                     scmd, sresult = self.get_command_result()
                     if scmd == "CMD:START":
-                        if result == "OK":
+                        if sresult == "OK":
                             return True
                         else:
-                            self.error(result)
+                            self.error(sresult)
                             return False
                 else:
                     return result
