@@ -546,12 +546,8 @@ class DAXML(metaclass=LogBase):
             self.info("Stage 1 successfully loaded.")
             da2 = self.daconfig.da2
             da2offset = self.daconfig.da_loader.region[2].m_start_addr
-            if not self.mtk.daloader.patch:
-                loaded = self.boot_to(da2offset, da2)
-                self.daext = False
-            else:
-                loaded = self.boot_to(da2offset, da2)
-                self.daext = False
+            loaded = self.boot_to(da2offset, da2)
+            self.daext = False
 
             if loaded:
                 self.info("Successfully uploaded stage 2")
