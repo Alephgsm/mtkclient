@@ -57,7 +57,7 @@ class upfile:
     def __init__(self, checksum, info, target_file, packet_length):
         self.checksum = checksum
         self.info = info
-        self.target_file = target_file
+        self.source_file = target_file
         self.packet_length = packet_length
 
 
