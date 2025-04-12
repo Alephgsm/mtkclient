@@ -136,7 +136,8 @@ class MtkConfig(metaclass=LogBase):
             if self.peek is not None:
                 if self.chipconfig.meid_addr is not None:
                     self.meid = self.peek(self.chipconfig.meid_addr, 0x10)
-                self.meid = self.peek(0x1008ec, 0x10)
+                else:
+                    self.meid = self.peek(0x1008ec, 0x10)
                 # self.set_meid(self.meid)
         return self.meid
 
