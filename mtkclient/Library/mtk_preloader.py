@@ -617,12 +617,18 @@ class Preloader(metaclass=LogBase):
         gen_chksum, data = self.prepare_data(b"", cert)
         if self.echo(self.Cmd.SEND_CERT.value):
             if self.echo(pack(">I", len(data))):
-                status = self.rword()
+                status = self.rdword()
                 if 0x0 <= status <= 0xFF:
                     if not self.upload_data(cert, gen_chksum):
                         self.error("Error on uploading certificate.")
                         return False
-                    return True
+                    crc = self.rword()
+                    if(cert != gen_chksum)
+                        return False
+                    status = self.rword()
+                    if 0x0 <= status <= 0xFF:
+                        return True
+                    return False
                 self.error(f"Send cert error:{self.eh.status(status)}")
         return False
 
@@ -644,9 +650,10 @@ class Preloader(metaclass=LogBase):
                     self.usbwrite(data[pos:pos + size])
                     bytestowrite -= size
                     pos += size
-                self.usbwrite(b"")
                 time.sleep(0.035)
                 crc = self.rword()
+                if(crc != gen_chksum)
+                    return False;
                 status = self.rword()
                 if 0x0 <= status <= 0xFF:
                     return True
